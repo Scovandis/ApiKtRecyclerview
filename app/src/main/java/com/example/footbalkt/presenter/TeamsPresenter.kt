@@ -7,8 +7,8 @@ import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainPresenter (
-    private val view: MainView,
+class TeamsPresenter (
+    private val view: TeamView,
     private val apiRepository: ApiRepository,
     private val gson: Gson)
 {

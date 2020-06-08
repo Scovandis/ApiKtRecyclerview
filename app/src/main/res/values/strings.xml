@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">FootbalKt</string>
+    <string name="teams">teams</string>
+    <string name="favorite">favorite</string>
 
     <array name="league">
         <item>English Premier League</item>

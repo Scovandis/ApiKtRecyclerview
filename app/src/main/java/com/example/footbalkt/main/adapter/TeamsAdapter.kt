@@ -1,4 +1,4 @@
-package com.example.footbalkt.main
+package com.example.footbalkt.main.adapter
 
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +11,8 @@ import com.example.footbalkt.model.Team
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class MainAdapter (private val teams: List<Team>)
-    : RecyclerView.Adapter<MainAdapter.TeamViewHolder>(){
+class TeamsAdapter (private val teams: List<Team>, private val listener: (Team) -> Unit)
+    : RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         return TeamViewHolder(
             TeamUi()
@@ -23,16 +23,18 @@ class MainAdapter (private val teams: List<Team>)
     override fun getItemCount() = teams.size
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        holder.bindItem(teams[position])
+        holder.bindItem(teams[position], listener)
     }
 
     class TeamViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val teamBadge: ImageView = view.findViewById(R.id.team_badge)
         private val teamName: TextView = view.findViewById(R.id.team_name)
 
-        fun bindItem(items: Team){
+        fun bindItem(items: Team, listener: (Team) -> Unit){
             Picasso.get().load(items.teamBadge).fit().into(teamBadge)
             teamName.text = items.teamName
+
+            itemView.setOnClickListener { listener(items) }
         }
     }
 
